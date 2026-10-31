@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SOLE STORIES</title>
+<meta name="author" content="Aashna A Shiju">
+<meta name="description" content="SOLE STORIES: an editorial blog about the design, history, culture, comfort and creativity of sneakers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a printed sneaker magazine. Ivory paper, Didone headlines, sans body,
+   numbered sections like a table of contents, charcoal bands for openers and the closing spread. */
+:root {
+  --ivory: #F4F0E8;
+  --charcoal: #242424;
+  --terracotta: #C94F36;
+  --stone: #D7D0C5;
+
+  --bg: var(--ivory);
+  --fg: var(--charcoal);
+  --muted: #5B554D;
+  --rule: #CDC5B8;
+  --surface: #ECE6DB;
+  --stone-bg: var(--stone);
+  --accent: var(--terracotta);
+  --accent-ink: #A23E28;          /* terracotta darkened for small text (AA on ivory) */
+  --band-bg: #242424;
+  --band-fg: #F4F0E8;
+  --band-muted: #C9C1B4;
+  --shoe-upper: #FBF9F4;
+  --shoe-mid: #EAE3D6;
+  --shoe-out: #2E2C29;
+  --shoe-detail: #D7D0C5;
+
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", "Times New Roman", serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --step-3: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  --step-4: clamp(2.6rem, 1.6rem + 5vw, 6rem);
+
+  --measure: 64ch;
+  --wrap: 1200px;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B1A18; --fg: #EEE8DD; --muted: #B3AB9F; --rule: #3A3732; --surface: #252320;
+    --stone-bg: #2E2B27; --accent: #DA6A4F; --accent-ink: #E8937B;
+    --band-bg: #11100F; --band-fg: #F4F0E8; --band-muted: #B9B1A5;
+    --shoe-upper: #3B3732; --shoe-mid: #4C463F; --shoe-out: #0E0E0D; --shoe-detail: #615A50;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B1A18; --fg: #EEE8DD; --muted: #B3AB9F; --rule: #3A3732; --surface: #252320;
+  --stone-bg: #2E2B27; --accent: #DA6A4F; --accent-ink: #E8937B;
+  --band-bg: #11100F; --band-fg: #F4F0E8; --band-muted: #B9B1A5;
+  --shoe-upper: #3B3732; --shoe-mid: #4C463F; --shoe-out: #0E0E0D; --shoe-detail: #615A50;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--bg);
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p { margin: 0; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.05; margin: 0; text-wrap: balance; }
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: var(--gutter-l);
+  padding-right: var(--gutter-r);
+}
+.label {
+  font-family: var(--body);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.prose { max-width: var(--measure); display: grid; gap: 1.1em; }
+.prose p { color: var(--fg); }
+.cite {
+  font-size: 0.72em; vertical-align: super; line-height: 0;
+  text-decoration: none; color: var(--accent-ink); font-weight: 600; margin-left: 1px;
+}
+.cite:hover { text-decoration: underline; }
+figcaption, .caption {
+  font-size: var(--step--1);
+  color: var(--muted);
+  line-height: 1.5;
+}
+.ai-tag { white-space: nowrap; }
+
+/* ---------- Masthead / navigation ---------- */
+.masthead {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.masthead .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-block: 0.85rem;
+}
+.wordmark {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.wordmark span { color: var(--accent); }
+.nav-toggle {
+  display: none;
+  font: 600 var(--step--1)/1 var(--body);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  background: none; color: var(--fg);
+  border: 1px solid var(--fg); border-radius: 0;
+  padding: 0.6rem 0.9rem; cursor: pointer;
+}
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: clamp(0.9rem, 2vw, 2rem); }
+.nav a {
+  font-size: var(--step--1); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; padding-block: 0.35rem; border-bottom: 1px solid transparent;
+}
+.nav a:hover, .nav a[aria-current="true"] { border-bottom-color: var(--accent); }
+@media (max-width: 860px) {
+  .nav-toggle { display: inline-block; }
+  .nav { position: absolute; inset: 100% 0 auto; background: var(--bg); border-bottom: 1px solid var(--rule); }
+  .nav ul { flex-direction: column; gap: 0; padding: 0.5rem var(--gutter-r) 1rem var(--gutter-l); }
+  .nav a { display: block; padding-block: 0.8rem; border-bottom: 1px solid var(--rule); }
+  .nav:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { border-bottom: 1px solid var(--rule); }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: min(78vh, 720px);
+}
+.hero-copy {
+  display: flex; flex-direction: column; justify-content: center; gap: 1.4rem;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  padding-left: max(var(--gutter-l), calc((100vw - var(--wrap)) / 2 + 16px));
+  padding-right: clamp(1rem, 3vw, 3rem);
+}
+.issue-line { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+.hero h1 {
+  font-size: clamp(2.6rem, 1.2rem + 4.4vw, 5.4rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
+  font-weight: 500;
+}
+.hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+.tagline { font-family: var(--display); font-style: italic; font-size: var(--step-2); line-height: 1.25; }
+.subtitle { color: var(--muted); max-width: 42ch; }
+.hero-media { position: relative; margin: 0; min-height: 320px; background: var(--stone-bg); }
+.hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 78% 60%; }
+.hero-media figcaption {
+  position: absolute; right: 12px; bottom: 10px;
+  background: color-mix(in srgb, var(--bg) 85%, transparent); color: var(--fg);
+  padding: 0.2rem 0.55rem; font-size: 0.72rem;
+}
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; min-height: 0; }
+  .hero-media { order: -1; aspect-ratio: 4 / 3; min-height: 0; }
+  .hero-copy { padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+}
+
+/* ---------- Intro + featured ---------- */
+.intro { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.intro-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
+.intro-lede { font-family: var(--display); font-size: var(--step-2); line-height: 1.35; max-width: 34ch; }
+.intro-lede::first-letter {
+  float: left; font-size: 3.6em; line-height: 0.82; padding: 0.06em 0.1em 0 0; color: var(--accent); font-weight: 600;
+}
+.featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); margin-top: clamp(2.5rem, 6vw, 4rem); }
+.feature-card { text-decoration: none; display: grid; gap: 0.85rem; align-content: start; }
+.feature-card .img { aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone-bg); }
+.feature-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.feature-card:hover img { transform: scale(1.03); }
+.feature-card h3 { font-size: var(--step-2); }
+.feature-card p { color: var(--muted); font-size: 0.95rem; }
+.feature-card .more { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+@media (max-width: 860px) {
+  .intro-grid { grid-template-columns: 1fr; }
+  .featured { grid-template-columns: 1fr; }
+  .feature-card { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; column-gap: 1rem; }
+  .feature-card .img { grid-row: span 4; aspect-ratio: 1; }
+}
+
+/* ---------- Section scaffolding ---------- */
+section[id], [id].anchor { scroll-margin-top: calc(70px + env(safe-area-inset-top, 0px)); }
+.section { padding-block: clamp(3.5rem, 8vw, 6.5rem); border-top: 1px solid var(--rule); }
+.section-head { display: grid; gap: 0.9rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); max-width: 52rem; }
+.section-head h2 { font-size: var(--step-3); }
+.standfirst { font-size: var(--step-1); color: var(--muted); max-width: 52ch; line-height: 1.5; }
+
+/* ---------- 01 What are sneakers ---------- */
+.what-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+.what-media { display: grid; gap: 1rem; }
+.what-media figure { margin: 0; display: grid; gap: 0.5rem; }
+.what-media .tall img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+.what-media .wide img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+.what-text { display: grid; gap: 2.5rem; }
+.pullquote {
+  margin: 0;
+  padding-block: 1.6rem;
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid var(--rule);
+}
+.pullquote p { font-family: var(--display); font-style: italic; font-size: var(--step-3); line-height: 1.1; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 0; }
+.facts div { border-top: 1px solid var(--rule); padding-top: 0.75rem; }
+.facts dt { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+.facts dd { margin: 0.25rem 0 0; font-size: 0.95rem; }
+@media (max-width: 860px) {
+  .what-grid { grid-template-columns: 1fr; }
+  .what-media { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .what-media .wide img { aspect-ratio: 4 / 5; }
+}
+@media (max-width: 460px) { .facts { grid-template-columns: 1fr; } }
+
+/* ---------- 02 Timeline ---------- */
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.timeline::before {
+  content: ""; position: absolute; top: 0.5rem; bottom: 0.5rem; left: calc(11rem + 7px); width: 1px; background: var(--rule);
+}
+.tl-item {
+  display: grid;
+  grid-template-columns: 11rem 15px minmax(0, 1fr);
+  column-gap: clamp(1rem, 3vw, 2.5rem);
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-date { font-family: var(--display); font-size: var(--step-2); line-height: 1.1; text-align: right; padding-top: 0.1rem; }
+.tl-date small { display: block; font-family: var(--body); font-size: var(--step--1); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+.tl-dot { width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); margin-top: 0.55rem; position: relative; z-index: 1; }
+.tl-item.key .tl-dot { background: var(--accent); }
+.tl-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.5rem); align-items: start; }
+.tl-body h3 { font-size: var(--step-2); margin-bottom: 0.6rem; }
+.tl-body .txt { display: grid; gap: 0.8rem; }
+.tl-body figure { margin: 0; display: grid; gap: 0.5rem; }
+.tl-body figure img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--stone-bg); }
+.tl-note { font-size: 0.92rem; color: var(--muted); border-left: 2px solid var(--stone-bg); padding-left: 0.8rem; }
+@media (max-width: 860px) {
+  .timeline::before { left: 7px; }
+  .tl-item { grid-template-columns: 15px minmax(0, 1fr); }
+  .tl-date { grid-column: 2; text-align: left; margin-bottom: 0.6rem; }
+  .tl-dot { grid-column: 1; grid-row: 1; margin-top: 0.45rem; }
+  .tl-body { grid-column: 2; grid-template-columns: 1fr; }
+}
+
+/* ---------- 03 Types ---------- */
+.types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.75rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 2rem); }
+.type-card { display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.75rem; }
+.type-card .img { background: var(--stone-bg); aspect-ratio: 4 / 3; overflow: hidden; }
+.type-card .img img { width: 100%; height: 100%; object-fit: cover; }
+.type-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; }
+.type-head h3 { font-size: var(--step-2); }
+.type-head .label { color: var(--muted); font-weight: 500; }
+.type-card p { font-size: 0.98rem; }
+.type-card dl { margin: 0; display: grid; gap: 0.35rem; font-size: 0.88rem; }
+.type-card dl div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 0.5rem; }
+.type-card dt { font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.72rem; color: var(--accent-ink); padding-top: 0.15rem; }
+.type-card dd { margin: 0; color: var(--muted); }
+.types-note { margin-top: 1.75rem; }
+@media (max-width: 960px) { .types { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .types { grid-template-columns: 1fr; } }
+
+/* ---------- 04 Fashion ---------- */
+.fashion-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+.looks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.look { margin: 0; display: grid; gap: 0.75rem; align-content: start; }
+.look:nth-child(even) { margin-top: clamp(0px, 4vw, 3rem); }
+.look figcaption { display: grid; gap: 0.4rem; }
+.look .img { aspect-ratio: 3 / 4; overflow: hidden; background: var(--stone-bg); }
+.look img { width: 100%; height: 100%; object-fit: cover; }
+.look h3 { font-size: var(--step-1); font-family: var(--display); font-weight: 600; }
+.look .num { font-family: var(--display); font-style: italic; color: var(--accent); margin-right: 0.35rem; }
+.look p { font-size: 0.94rem; }
+.look .credit { font-size: 0.75rem; color: var(--muted); }
+.details { margin-top: clamp(3rem, 6vw, 4.5rem); }
+.details h3 { font-size: var(--step-2); margin-bottom: 1.25rem; }
+.details-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem; margin: 0; }
+.details-grid div { border-top: 2px solid var(--fg); padding-top: 0.8rem; }
+.details-grid dt { font-family: var(--display); font-size: var(--step-1); font-weight: 600; margin-bottom: 0.35rem; }
+.details-grid dd { margin: 0; font-size: 0.92rem; color: var(--muted); }
+@media (max-width: 960px) {
+  .looks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .details-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) { .fashion-intro { grid-template-columns: 1fr; } }
+@media (max-width: 460px) {
+  .looks { grid-template-columns: 1fr; }
+  .look:nth-child(even) { margin-top: 0; }
+  .details-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- 05 Anatomy ---------- */
+.diagram-wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 2.5rem); }
+.diagram { margin: 0; background: var(--surface); padding: clamp(0.75rem, 3vw, 2.5rem) clamp(0.75rem, 5vw, 5rem); display: grid; gap: 0.75rem; }
+.diagram svg { width: 100%; height: auto; display: block; }
+.diagram .outsole { fill: var(--shoe-out); }
+.diagram .tread { stroke: var(--shoe-mid); stroke-width: 2; opacity: 0.55; }
+.diagram .midsole { fill: var(--shoe-mid); stroke: var(--fg); stroke-width: 2.5; }
+.diagram .stripe { stroke: var(--accent); stroke-width: 3; }
+.diagram .upper { fill: var(--shoe-upper); stroke: var(--fg); stroke-width: 3; stroke-linejoin: round; }
+.diagram .tongue { fill: var(--shoe-detail); stroke: var(--fg); stroke-width: 3; stroke-linejoin: round; }
+.diagram .heel, .diagram .toecap, .diagram .eyestay { fill: var(--shoe-detail); stroke: var(--fg); stroke-width: 2.5; stroke-linejoin: round; }
+.diagram .tab { fill: var(--accent); stroke: var(--fg); stroke-width: 2; }
+.diagram .seam { fill: none; stroke: var(--fg); stroke-width: 1.5; stroke-dasharray: 5 5; opacity: 0.6; }
+.diagram .eyelet { fill: var(--surface); stroke: var(--fg); stroke-width: 2; }
+.diagram .lace { fill: none; stroke: var(--fg); stroke-width: 4.5; stroke-linecap: round; }
+.diagram .insole { stroke: var(--accent); stroke-width: 3; stroke-dasharray: 10 7; }
+.diagram .shadow { fill: var(--fg); opacity: 0.08; }
+.diagram .leader { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.diagram .pin { fill: var(--accent); }
+.diagram .badge { fill: var(--fg); }
+.diagram .badge-num { fill: var(--bg); font: 600 17px var(--body); }
+.diagram .lbl { fill: var(--fg); font: 500 22px var(--body); letter-spacing: 0.02em; }
+@media (max-width: 640px) { .diagram .lbl { display: none; } .diagram .badge-num { font-size: 20px; } }
+.parts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 1.25rem 2rem; }
+.parts li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.75rem; align-items: start; }
+.parts .n {
+  width: 1.75rem; height: 1.75rem; border-radius: 50%; background: var(--fg); color: var(--bg);
+  display: grid; place-items: center; font-size: 0.8rem; font-weight: 600; margin-top: 0.1rem;
+}
+.parts strong { font-family: var(--display); font-size: 1.15rem; font-weight: 600; display: block; }
+.parts span.d { font-size: 0.94rem; color: var(--muted); }
+.materials { margin-top: clamp(3rem, 6vw, 4.5rem); }
+.materials h3 { font-size: var(--step-2); margin-bottom: 0.5rem; }
+.materials > p { color: var(--muted); max-width: var(--measure); margin-bottom: 1.5rem; }
+.mat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); margin: 0; }
+.mat-grid div { padding: 1.1rem 1.25rem 1.25rem 0; border-bottom: 1px solid var(--rule); display: grid; gap: 0.3rem; }
+.mat-grid dt { display: flex; align-items: center; gap: 0.6rem; font-family: var(--display); font-size: var(--step-1); font-weight: 600; }
+.swatch { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--fg); flex: none; }
+.mat-grid dd { margin: 0; font-size: 0.93rem; color: var(--muted); }
+.mat-grid dd b { color: var(--fg); font-weight: 600; }
+@media (max-width: 960px) {
+  .mat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) { .mat-grid { grid-template-columns: 1fr; } }
+
+/* ---------- 06 Care ---------- */
+.care-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+.care-grid figure { margin: 0; display: grid; gap: 0.5rem; position: sticky; top: 90px; }
+.care-grid figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 50%; }
+.care-text { display: grid; gap: 2rem; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: step; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 0.5rem; padding-block: 1rem; border-top: 1px solid var(--rule); }
+.steps li::before { content: counter(step, decimal-leading-zero); font-family: var(--display); font-style: italic; font-size: 1.5rem; color: var(--accent); line-height: 1.1; }
+.steps strong { display: block; font-weight: 600; }
+.steps span { color: var(--muted); font-size: 0.95rem; }
+.long-term { background: var(--surface); padding: clamp(1.25rem, 3vw, 2rem); display: grid; gap: 0.9rem; }
+.long-term h3 { font-size: var(--step-1); font-weight: 600; }
+.long-term ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.6rem; }
+.long-term li::marker { color: var(--accent); }
+@media (max-width: 860px) {
+  .care-grid { grid-template-columns: 1fr; }
+  .care-grid figure { position: static; }
+  .care-grid figure img { aspect-ratio: 4 / 3; }
+}
+
+/* ---------- Conclusion ---------- */
+.closing { background: var(--band-bg); color: var(--band-fg); }
+.closing-media { margin: 0; position: relative; }
+.closing-media img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 72%; }
+.closing-media figcaption { position: absolute; right: 12px; bottom: 10px; color: #F4F0E8; background: rgba(20, 20, 20, 0.55); padding: 0.2rem 0.55rem; font-size: 0.72rem; }
+.closing .wrap { padding-block: clamp(3rem, 8vw, 6rem); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.closing .label { color: var(--band-muted); }
+.closing h2 { font-size: var(--step-3); color: var(--band-fg); margin-top: 0.8rem; }
+.closing .prose p { color: var(--band-fg); }
+.closing .prose p:last-child { font-family: var(--display); font-style: italic; font-size: var(--step-1); }
+.signoff {
+  grid-column: 1 / -1;
+  font-family: var(--display); font-weight: 600; text-transform: uppercase;
+  font-size: clamp(2.2rem, 1rem + 6.5vw, 7rem); line-height: 0.95; letter-spacing: -0.01em;
+  border-top: 1px solid rgba(244, 240, 232, 0.25); padding-top: clamp(1.5rem, 4vw, 3rem);
+}
+.signoff span { color: #E07558; }
+@media (max-width: 860px) {
+  .closing .wrap { grid-template-columns: 1fr; }
+  .closing-media img { aspect-ratio: 4 / 3; }
+}
+
+/* ---------- References ---------- */
+.refs-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); }
+.refs-grid h3 { font-size: var(--step-2); margin-bottom: 1rem; }
+.ref-list { margin: 0; padding-left: 1.6rem; display: grid; gap: 0.85rem; font-size: 0.93rem; }
+.ref-list li::marker { color: var(--accent-ink); font-weight: 600; }
+.ref-list a { overflow-wrap: anywhere; color: var(--accent-ink); }
+.ref-list .src { color: var(--muted); }
+.credits { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.85rem; font-size: 0.9rem; }
+.credits li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 0.85rem; align-items: start; border-top: 1px solid var(--rule); padding-top: 0.85rem; }
+.credits img { width: 56px; height: 56px; object-fit: cover; background: var(--stone-bg); }
+.credits a { color: var(--accent-ink); overflow-wrap: anywhere; }
+.credits .muted, .refs-note { color: var(--muted); }
+.ai-box { background: var(--surface); padding: 1.1rem 1.25rem; font-size: 0.92rem; margin-bottom: 1.25rem; display: grid; gap: 0.5rem; }
+.ai-box strong { font-weight: 600; }
+.ai-thumbs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.4rem; }
+.ai-thumbs img { width: 48px; height: 48px; object-fit: cover; background: var(--stone-bg); }
+@media (max-width: 860px) { .refs-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Homepage author credit ---------- */
+.hero-credit { display: grid; gap: 0.2rem; width: fit-content; max-width: 100%; padding-top: 0.9rem; border-top: 1px solid var(--rule); }
+.hero-credit a { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; }
+.hero-credit a:hover { color: var(--accent-ink); }
+.hero-credit span { font-size: var(--step--1); color: var(--muted); }
+
+/* ---------- About the author ---------- */
+.author { background: var(--surface); padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+.author-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.author-id { display: grid; gap: 1.1rem; }
+.author-id h2 { font-size: var(--step-2); text-transform: uppercase; letter-spacing: 0.04em; }
+.author-name { font-family: var(--display); font-style: italic; font-size: var(--step-4); line-height: 0.98; color: var(--accent-ink); text-wrap: balance; }
+.author-role { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.author-text { display: grid; gap: 1.1em; max-width: var(--measure); padding-top: 1.5rem; border-top: 2px solid var(--accent); }
+.author-text .lead { font-family: var(--display); font-size: var(--step-2); line-height: 1.3; }
+@media (max-width: 860px) { .author-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Project details ---------- */
+.project-head { font-size: var(--step-2); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 1.5rem; }
+.project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(1rem, 3vw, 2.5rem); margin: 0; border-bottom: 1px solid var(--rule); }
+.project-grid div { display: grid; gap: 0.3rem; align-content: start; padding-block: 1rem 1.2rem; border-top: 1px solid var(--rule); }
+.project-grid dt { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+.project-grid dd { margin: 0; font-family: var(--display); font-size: var(--step-1); line-height: 1.3; }
+@media (max-width: 860px) { .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .project-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Footer ---------- */
+.site-footer { border-top: 1px solid var(--rule); padding-block: 2rem 2.5rem; }
+.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; align-items: baseline; }
+.site-footer p { font-size: var(--step--1); color: var(--muted); }
+.site-footer a { color: var(--accent-ink); }
+
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="#home" aria-label="Sole Stories, back to top">SOLE STORIES<span>.</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#styles">Sneaker Styles</a></li>
+        <li><a href="#fashion">Fashion</a></li>
+        <li><a href="#anatomy">Anatomy</a></li>
+        <li><a href="#care">Care</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ===== HOME ===== -->
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="issue-line">
+          <span class="label">Issue 01</span>
+          <span class="label" style="color: var(--muted)">Fashion Basics · NIFT Hyderabad</span>
+        </div>
+        <h1 id="hero-title">Step into the <em>world</em> of sneakers</h1>
+        <p class="tagline">More than shoes. A culture, a statement, a way of life.</p>
+        <p class="subtitle">Exploring the design, history, culture, comfort, and creativity behind sneakers.</p>
+        <p class="hero-credit">
+          <a href="#about-author">A blog by Aashna A Shiju</a>
+          <span>Fashion Communication | NIFT Hyderabad</span>
+        </p>
+      </div>
+      <figure class="hero-media">
+        <img src="images/hero.jpg" width="1376" height="768"
+             alt="A pair of white retro leather sneakers with terracotta heel tabs and gum-toned soles, resting on a pale plaster plinth in soft window light.">
+        <figcaption>AI-generated image</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="intro">
+    <div class="wrap">
+      <div class="intro-grid">
+        <p class="intro-lede">Sneakers are more than just footwear. They represent comfort, creativity, identity, and culture.</p>
+        <div class="prose">
+          <p>From timeless classics to bold contemporary designs, sneakers have become an essential part of the modern wardrobe. Join me as I explore their history, styles, construction, and influence on fashion.</p>
+          <p>This blog is my Fashion Basics project as a first-year Fashion Communication student. Each section looks at sneakers from a different angle: what they are, where they came from, the shapes they take, how we style them, how they are built, and how to make a good pair last.</p>
+        </div>
+      </div>
+
+      <div class="featured" aria-label="Featured stories">
+        <a class="feature-card" href="#history">
+          <div class="img"><img src="images/tl-1916.jpg" width="1600" height="992" loading="lazy" alt="A pair of worn cream canvas lace-up sneakers from 1916 displayed in a museum case."></div>
+          <span class="label">Feature</span>
+          <h3>History of Sneakers</h3>
+          <p>From rubber experiments to basketball courts and city streets.</p>
+          <span class="more">Read the timeline →</span>
+        </a>
+        <a class="feature-card" href="#styles">
+          <div class="img"><img src="images/retro.jpg" width="1200" height="896" loading="lazy" alt="A retro-style running sneaker in cream nylon with terracotta and tan suede overlays and a gum sole."></div>
+          <span class="label">Guide</span>
+          <h3>Explore Sneaker Styles</h3>
+          <p>Six silhouettes, from everyday low-tops to statement platforms.</p>
+          <span class="more">See the styles →</span>
+        </a>
+        <a class="feature-card" href="#fashion">
+          <div class="img"><img src="images/tl-harajuku.jpg" width="1600" height="1067" loading="lazy" style="object-position: 30% 50%" alt="Street-style photograph in Harajuku, Tokyo, of a person in an orange puffer jacket, checked trousers and chunky sneakers."></div>
+          <span class="label">Culture</span>
+          <h3>Sneakers and Culture</h3>
+          <p>How streetwear, music and personal style made sneakers fashion.</p>
+          <span class="more">Get styled →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 01 WHAT ARE SNEAKERS ===== -->
+  <section class="section" id="what" aria-labelledby="what-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">Section 01</span>
+        <h2 id="what-title">What are sneakers?</h2>
+        <p class="standfirst">A flexible sole, a soft upper, and room for endless reinvention.</p>
+      </div>
+
+      <div class="what-grid">
+        <div class="what-media">
+          <figure class="tall">
+            <img src="images/classic-white.jpg" width="928" height="1152" loading="lazy"
+                 alt="A pair of classic white canvas low-top sneakers on rumpled linen; one stands upright and the other lies on its side showing the ridged sole.">
+            <figcaption>The classic white canvas low-top: rubber toe cap, flat laces and a flexible sole. <span class="ai-tag">AI-generated image.</span></figcaption>
+          </figure>
+          <figure class="wide">
+            <img src="images/materials.jpg" width="1200" height="896" loading="lazy"
+                 alt="Macro close-up of a sneaker showing beige canvas, a leather overlay with double stitching, a mesh panel, laces through metal eyelets and a grey rubber sole edge.">
+            <figcaption>Up close: canvas, leather overlays, mesh, metal eyelets, stitching and a rubber sidewall. <span class="ai-tag">AI-generated image.</span></figcaption>
+          </figure>
+        </div>
+
+        <div class="what-text">
+          <div class="prose">
+            <p>Sneakers are a type of footwear with a flexible sole, usually made of rubber or foam, and an upper made from materials such as canvas, mesh, leather or synthetic fabrics. Depending on how they are built, they can be designed for sport, exercise, walking or simply everyday wear.</p>
+            <p>They began as functional shoes. Rubber soles gave grip and moved quietly, and lightweight uppers let feet bend and breathe. Over the twentieth century, athletes, musicians, skaters and young people adopted them, and sneakers slowly moved from the sports field into everyday fashion.</p>
+            <p>Today their appeal comes from three things. They are <strong>versatile</strong>: one pair can work with jeans, a dress or a suit. They are <strong>comfortable</strong>, built to be worn all day. And they are <strong>expressive</strong>: colour, shape and material let the wearer say something about who they are.</p>
+          </div>
+
+          <blockquote class="pullquote">
+            <p>“One shoe, countless ways to express yourself.”</p>
+          </blockquote>
+
+          <dl class="facts">
+            <div><dt>Sole</dt><dd>Flexible rubber or foam for grip and cushioning</dd></div>
+            <div><dt>Upper</dt><dd>Canvas, mesh, leather or synthetic fabric</dd></div>
+            <div><dt>Purpose</dt><dd>Sport, exercise, walking and everyday wear</dd></div>
+            <div><dt>Role in fashion</dt><dd>Comfort, versatility and self-expression</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 02 HISTORY ===== -->
+  <section class="section" id="history" aria-labelledby="history-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">Section 02</span>
+        <h2 id="history-title">A walk through history</h2>
+        <p class="standfirst">How a rubber-soled sports shoe became one of the most worn objects in the world.</p>
+      </div>
+
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-date">1800s<small>Nineteenth century</small></div>
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-body">
+            <div class="txt">
+              <h3>Rubber learns to behave</h3>
+              <p>Natural rubber softened in heat and cracked in cold, which made it hard to use in shoes. Better processing changed that. In 1844 the American inventor Charles Goodyear was granted a US patent for vulcanisation, which uses sulphur and heat to make rubber stronger and more stable.<a class="cite" href="#ref-10">[10]</a></p>
+              <p>Durable rubber made rubber-soled canvas shoes possible. By the late 1800s, pairs like the one shown here were being made for leisure and sport.</p>
+            </div>
+            <figure>
+              <img src="images/tl-1890s.jpg" width="1600" height="772" loading="lazy" alt="A pair of black canvas lace-up shoes with black rubber soles and toe caps from the 1890s, photographed in a museum.">
+              <figcaption>Rubber-soled canvas sneakers, 1890s, made by the Goodyear Rubber Manufacturing Company. Bata Shoe Museum, Toronto. Photo: Daderot, CC0.</figcaption>
+            </figure>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-date">1900s<small>Early twentieth century</small></div>
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-body">
+            <div class="txt">
+              <h3>Shoes made for the game</h3>
+              <p>As organised sport grew, manufacturers began designing footwear for particular activities such as tennis, track and the new game of basketball, invented in 1891.<a class="cite" href="#ref-2">[2]</a> Canvas uppers kept shoes light, and rubber soles gave grip on courts and floors.</p>
+            </div>
+            <figure>
+              <img src="images/tl-1916.jpg" width="1600" height="992" loading="lazy" alt="A pair of cream canvas ankle-height women's sneakers with rubber soles from 1916, in a museum display.">
+              <figcaption>Keds Champion women's sneaker, 1916. Bata Shoe Museum, Toronto. Photo: Daderot, CC0.</figcaption>
+            </figure>
+          </div>
+        </li>
+
+        <li class="tl-item key">
+          <div class="tl-date">1917<small>A basketball first</small></div>
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-body">
+            <div class="txt">
+              <h3>The Converse Non-Skid</h3>
+              <p>In 1917 Converse introduced the Non-Skid, one of the first shoes designed specifically for basketball.<a class="cite" href="#ref-1">[1]</a> In 1919, after coaches asked for a darker canvas that hid wear, Converse released it in brown and named it the All Star.<a class="cite" href="#ref-1">[1]</a></p>
+              <p>Charles “Chuck” Taylor joined Converse as a salesman in 1922, and his signature was added to the shoe in 1934.<a class="cite" href="#ref-1">[1]</a></p>
+              <p class="tl-note">The photo shows a canvas basketball high-top from the same period, made by Keds. It is not a Converse shoe.</p>
+            </div>
+            <figure>
+              <img src="images/tl-1929.jpg" width="1600" height="1067" loading="lazy" alt="A pair of cream canvas high-top basketball sneakers with black rubber toe caps and soles from 1929, in a museum display.">
+              <figcaption>Keds basketball sneakers, 1929, shown for period context. Bata Shoe Museum, Toronto. Photo: Daderot, CC0.</figcaption>
+            </figure>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-date">1950s–90s<small>Mid to late twentieth century</small></div>
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-body">
+            <div class="txt">
+              <h3>From the court to the culture</h3>
+              <p>Sneakers spread far beyond the gym. Converse introduced a low-top All Star in 1957, and it became popular in California.<a class="cite" href="#ref-1">[1]</a> Skateboarders adopted canvas low-tops, and musicians wore them on stage in the 1950s and 1960s.<a class="cite" href="#ref-2">[2]</a></p>
+              <p>Running, basketball, skateboarding, music and youth culture each brought sneakers to new audiences. Specialist running shoes, signature basketball shoes and skate shoes multiplied the styles on offer.</p>
+            </div>
+            <figure>
+              <img src="images/tl-cortez.jpg" width="1600" height="1110" loading="lazy" alt="A white leather running sneaker with a red side logo and a blue-striped midsole, displayed on a perforated shop wall.">
+              <figcaption>The Nike Cortez, a classic running silhouette, photographed on a shop wall. Photo: LeDroider, CC0.</figcaption>
+            </figure>
+          </div>
+        </li>
+
+        <li class="tl-item key">
+          <div class="tl-date">Today<small>Contemporary era</small></div>
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-body">
+            <div class="txt">
+              <h3>Streetwear, runways and every wardrobe</h3>
+              <p>Sneakers now sit at the centre of streetwear and appear in designer collections and everyday wardrobes. Converse, for example, entered its first fashion collaboration in 2000, with designer John Richmond.<a class="cite" href="#ref-1">[1]</a></p>
+              <p>Old designs keep coming back too. In 2026 Vogue India described the canvas high-top as an “anti-hype” favourite, more than a century after it first appeared on basketball courts.<a class="cite" href="#ref-9">[9]</a></p>
+            </div>
+            <figure>
+              <img src="images/tl-harajuku.jpg" width="1600" height="1067" loading="lazy" alt="Street-style photograph on a wet Harajuku street at night: a person in an orange puffer jacket, checked trousers and chunky trainers.">
+              <figcaption>Street style in Harajuku, Tokyo, 2018. Photo: Dick Thomas Johnson, CC BY 2.0.</figcaption>
+            </figure>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== 03 TYPES ===== -->
+  <section class="section" id="styles" aria-labelledby="styles-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">Section 03</span>
+        <h2 id="styles-title">Types of sneakers</h2>
+        <p class="standfirst">Six silhouettes every sneaker lover should be able to recognise.</p>
+      </div>
+
+      <div class="types">
+        <article class="type-card">
+          <div class="img"><img src="images/low-top.jpg" width="1200" height="896" loading="lazy" alt="Side view of an off-white leather low-top sneaker with a beige suede heel panel; the collar sits below the ankle."></div>
+          <div class="type-head"><h3>Low-top</h3><span class="label">Everyday</span></div>
+          <p>Shoes that sit below the ankle. Their versatile silhouette works well with jeans, shorts, skirts and casual outfits.</p>
+          <dl>
+            <div><dt>Height</dt><dd>Below the ankle bone</dd></div>
+            <div><dt>Look</dt><dd>Clean, light, easy to style</dd></div>
+            <div><dt>Pair with</dt><dd>Jeans, shorts, skirts</dd></div>
+          </dl>
+        </article>
+
+        <article class="type-card">
+          <div class="img"><img src="images/high-top.jpg" width="1200" height="896" loading="lazy" alt="Side view of a high-top sneaker in black and terracotta leather with a padded collar that rises above the ankle."></div>
+          <div class="type-head"><h3>High-top</h3><span class="label">Heritage</span></div>
+          <p>Shoes that extend above the ankle. They are associated with basketball heritage and streetwear.</p>
+          <dl>
+            <div><dt>Height</dt><dd>Above the ankle, padded collar</dd></div>
+            <div><dt>Roots</dt><dd>Basketball courts</dd></div>
+            <div><dt>Pair with</dt><dd>Cuffed jeans, joggers, streetwear</dd></div>
+          </dl>
+        </article>
+
+        <article class="type-card">
+          <div class="img"><img src="images/chunky.jpg" width="1200" height="896" loading="lazy" alt="Side view of a chunky sneaker with a thick, wavy, layered sole and a beige, grey and white upper with a terracotta heel accent."></div>
+          <div class="type-head"><h3>Chunky</h3><span class="label">Statement</span></div>
+          <p>Shoes with thick, substantial soles that create a bold silhouette and make a strong fashion statement.</p>
+          <dl>
+            <div><dt>Sole</dt><dd>Thick, sculpted, often layered</dd></div>
+            <div><dt>Look</dt><dd>Bold and exaggerated</dd></div>
+            <div><dt>Pair with</dt><dd>Oversized and wide-leg clothing</dd></div>
+          </dl>
+        </article>
+
+        <article class="type-card">
+          <div class="img"><img src="images/platform.jpg" width="1200" height="896" loading="lazy" alt="Side view of an off-white canvas sneaker on a tall, flat white platform sole with a thin dark stripe."></div>
+          <div class="type-head"><h3>Platform</h3><span class="label">Height</span></div>
+          <p>Shoes with elevated soles that add height and create a distinctive profile.</p>
+          <dl>
+            <div><dt>Sole</dt><dd>Evenly raised from heel to toe</dd></div>
+            <div><dt>Look</dt><dd>Lifted, playful profile</dd></div>
+            <div><dt>Pair with</dt><dd>Cropped trousers, skirts, dresses</dd></div>
+          </dl>
+        </article>
+
+        <article class="type-card">
+          <div class="img"><img src="images/running.jpg" width="1200" height="896" loading="lazy" alt="Side view of a running shoe with a charcoal knit mesh upper, a thick white foam midsole and a terracotta heel tab."></div>
+          <div class="type-head"><h3>Running</h3><span class="label">Performance</span></div>
+          <p>Footwear designed for running, commonly featuring lightweight uppers, cushioning, and outsoles suited to the activity.</p>
+          <dl>
+            <div><dt>Upper</dt><dd>Light, breathable mesh or knit</dd></div>
+            <div><dt>Midsole</dt><dd>Foam cushioning, often thicker at the heel</dd></div>
+            <div><dt>Outsole</dt><dd>Grippy rubber pattern</dd></div>
+          </dl>
+        </article>
+
+        <article class="type-card">
+          <div class="img"><img src="images/retro.jpg" width="1200" height="896" loading="lazy" alt="Side view of a slim retro running sneaker with cream nylon panels, terracotta and tan suede overlays and a gum rubber sole."></div>
+          <div class="type-head"><h3>Retro</h3><span class="label">Revival</span></div>
+          <p>Modern shoes inspired by earlier designs, often featuring vintage colours, classic shapes, suede or nylon.</p>
+          <dl>
+            <div><dt>Inspiration</dt><dd>Designs from earlier decades</dd></div>
+            <div><dt>Materials</dt><dd>Suede, nylon, gum rubber</dd></div>
+            <div><dt>Colours</dt><dd>Warm, faded, vintage tones</dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="caption types-note">All six style illustrations are AI-generated product images made for this blog. They show general styles, not real branded products.</p>
+    </div>
+  </section>
+
+  <!-- ===== 04 FASHION ===== -->
+  <section class="section" id="fashion" aria-labelledby="fashion-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">Section 04</span>
+        <h2 id="fashion-title">Sneakers meet fashion</h2>
+        <p class="standfirst">Once kept for sport, sneakers now decide the mood of an outfit.</p>
+      </div>
+
+      <div class="fashion-intro">
+        <div class="prose">
+          <p>Sneakers changed what “dressed up” means. Many people now choose their shoes first and build the outfit around them. A pair can make a formal look relaxed, give a simple look some edge, or tie colours together.</p>
+        </div>
+        <div class="prose">
+          <p>Fashion media now treats sneakers as a serious styling tool. Vogue India's guides pair white sneakers with cuffed jeans,<a class="cite" href="#ref-6">[6]</a> tennis sneakers with dresses and skirts,<a class="cite" href="#ref-7">[7]</a> and revived 1980s styles with slim jeans.<a class="cite" href="#ref-8">[8]</a> Here are four ways to style them.</p>
+        </div>
+      </div>
+
+      <div class="looks">
+        <figure class="look">
+          <div class="img"><img src="images/casual.jpg" width="928" height="1152" loading="lazy" style="object-position: 50% 70%" alt="A person walking on a sunlit stone street in a white T-shirt, light-blue straight-leg jeans and white low-top sneakers."></div>
+          <figcaption>
+            <h3><span class="num">i.</span>Casual</h3>
+            <p>White sneakers with jeans and a T-shirt. The simplest uniform there is, and it works because the clean white shoe brightens everything around it.</p>
+            <span class="credit">AI-generated image</span>
+          </figcaption>
+        </figure>
+        <figure class="look">
+          <div class="img"><img src="images/streetwear.jpg" width="928" height="1152" loading="lazy" style="object-position: 50% 70%" alt="A person on concrete city steps in an oversized charcoal hoodie, wide stone-beige cargo trousers and chunky beige and grey sneakers with terracotta accents."></div>
+          <figcaption>
+            <h3><span class="num">ii.</span>Streetwear</h3>
+            <p>Chunky sneakers with oversized clothing. A heavy sole balances loose, roomy layers so the outfit doesn't look like it is swallowing the wearer.</p>
+            <span class="credit">AI-generated image</span>
+          </figcaption>
+        </figure>
+        <figure class="look">
+          <div class="img"><img src="images/feminine.jpg" width="928" height="1152" loading="lazy" style="object-position: 50% 70%" alt="A person walking across a sunlit stone courtyard in a flowing terracotta pleated midi skirt, short white socks and white canvas low-top sneakers."></div>
+          <figcaption>
+            <h3><span class="num">iii.</span>Feminine</h3>
+            <p>Sneakers with dresses or skirts. Flat, sporty shoes against a soft pleated skirt create contrast and make the look feel modern and wearable.</p>
+            <span class="credit">AI-generated image</span>
+          </figcaption>
+        </figure>
+        <figure class="look">
+          <div class="img"><img src="images/monochrome.jpg" width="928" height="1152" loading="lazy" style="object-position: 50% 70%" alt="A person against an ivory wall in a tonal beige outfit: cable-knit sweater, tailored trousers and matching beige suede sneakers."></div>
+          <figcaption>
+            <h3><span class="num">iv.</span>Monochrome</h3>
+            <p>Sneakers in the same colour family as the clothes. Here, beige suede meets beige knitwear and tailoring, so the eye travels in one long, unbroken line.</p>
+            <span class="credit">AI-generated image</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="details">
+        <h3>The details that shape a look</h3>
+        <dl class="details-grid">
+          <div><dt>Colour</dt><dd>White feels clean and neutral, black feels sleek, and bright shoes become the focal point of an outfit.</dd></div>
+          <div><dt>Texture</dt><dd>Smooth leather looks polished, suede looks soft and vintage, and canvas or mesh feels casual and sporty.</dd></div>
+          <div><dt>Silhouette</dt><dd>Slim shoes suit fitted clothes; chunky or platform soles balance wide, oversized shapes.</dd></div>
+          <div><dt>Laces</dt><dd>Contrast laces add a pop of colour, flat laces look neat, and loose laces feel relaxed.</dd></div>
+          <div><dt>Materials</dt><dd>Each material changes how a shoe catches light, ages and wrinkles, and so changes the overall mood.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05 ANATOMY ===== -->
+  <section class="section" id="anatomy" aria-labelledby="anatomy-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">Section 05</span>
+        <h2 id="anatomy-title">Inside a sneaker</h2>
+        <p class="standfirst">Every sneaker is a set of layers, and each layer has its own job.</p>
+      </div>
+
+      <div class="diagram-wrap">
+        <figure class="diagram">
+          <svg viewBox="0 0 1000 520" role="img" aria-labelledby="dgm-title dgm-desc">
+            <title id="dgm-title">Annotated side view of a sneaker</title>
+            <desc id="dgm-desc">A low-top sneaker facing right, with numbered labels: 1 upper, 2 laces, 3 tongue, 4 insole inside the shoe, 5 midsole, 6 outsole, 7 toe box.</desc>
+            <ellipse class="shadow" cx="505" cy="446" rx="420" ry="11"/>
+            <!-- sole unit -->
+            <path class="outsole" d="M118,402 L872,402 C896,402 910,410 910,418 C910,428 896,434 872,434 L132,434 C112,434 100,426 100,418 C100,409 106,402 118,402 Z"/>
+            <path class="tread" d="M150,427v6M180,427v6M210,427v6M240,427v6M270,427v6M300,427v6M330,427v6M360,427v6M390,427v6M420,427v6M450,427v6M480,427v6M510,427v6M540,427v6M570,427v6M600,427v6M630,427v6M660,427v6M690,427v6M720,427v6M750,427v6M780,427v6M810,427v6M840,427v6"/>
+            <path class="midsole" d="M116,350 L850,350 C880,352 902,370 908,402 L102,402 C100,384 104,364 116,350 Z"/>
+            <line class="stripe" x1="108" y1="374" x2="902" y2="374"/>
+            <!-- tongue sits behind the upper -->
+            <path class="tongue" d="M316,216 C320,180 330,148 348,130 C362,116 394,116 406,130 C416,142 424,190 448,238 Z"/>
+            <!-- upper -->
+            <path class="upper" d="M116,350 C104,300 108,232 140,186 C150,172 166,166 184,168 L214,172 C246,196 284,214 318,214 L446,236 L560,266 L660,292 C730,302 800,310 846,326 C876,337 896,346 900,350 Z"/>
+            <path class="heel" d="M116,350 C104,300 108,232 140,186 C150,172 166,166 184,168 C176,212 180,282 198,350 Z"/>
+            <path class="tab" d="M154,176 L158,146 C160,139 175,137 179,144 L184,168 C173,168 162,171 154,176 Z"/>
+            <path class="toecap" d="M760,304 C800,309 840,316 868,330 C886,339 898,346 900,350 L742,350 C738,330 744,312 760,304 Z"/>
+            <path class="eyestay" d="M318,214 L446,236 L660,292 L650,306 L440,252 L312,232 Z"/>
+            <path class="seam" d="M204,346 C236,300 290,268 330,252"/>
+            <path class="seam" d="M736,346 C732,326 740,312 752,306"/>
+            <!-- eyelets and laces -->
+            <circle class="eyelet" cx="352" cy="229" r="5.5"/>
+            <circle class="eyelet" cx="410" cy="238.5" r="5.5"/>
+            <circle class="eyelet" cx="480" cy="253.5" r="5.5"/>
+            <circle class="eyelet" cx="550" cy="271.5" r="5.5"/>
+            <circle class="eyelet" cx="620" cy="289.5" r="5.5"/>
+            <path class="lace" d="M352,229 L412,224 M410,238 L482,240 M480,253 L552,257 M550,271 L622,275 M620,289 L644,284"/>
+            <path class="lace" d="M352,229 C330,204 300,212 316,229 M352,229 C362,198 394,204 374,226 M352,229 C346,250 338,262 330,272"/>
+            <!-- insole (inside the shoe) -->
+            <line class="insole" x1="146" y1="342" x2="862" y2="342"/>
+
+            <!-- callouts: leader, pin on the shoe, numbered badge, label -->
+            <g>
+              <path class="leader" d="M250,292 L70,112"/><circle class="pin" cx="250" cy="292" r="5"/>
+              <circle class="badge" cx="70" cy="112" r="15"/><text class="badge-num" x="70" y="118" text-anchor="middle">1</text>
+              <text class="lbl" x="94" y="119">Upper</text>
+            </g>
+            <g>
+              <path class="leader" d="M516,252 L560,118"/><circle class="pin" cx="516" cy="252" r="5"/>
+              <circle class="badge" cx="560" cy="118" r="15"/><text class="badge-num" x="560" y="124" text-anchor="middle">2</text>
+              <text class="lbl" x="584" y="125">Laces</text>
+            </g>
+            <g>
+              <path class="leader" d="M378,146 L330,58"/><circle class="pin" cx="378" cy="146" r="5"/>
+              <circle class="badge" cx="330" cy="58" r="15"/><text class="badge-num" x="330" y="64" text-anchor="middle">3</text>
+              <text class="lbl" x="354" y="65">Tongue</text>
+            </g>
+            <g>
+              <path class="leader" d="M600,342 L600,486"/><circle class="pin" cx="600" cy="342" r="5"/>
+              <circle class="badge" cx="600" cy="486" r="15"/><text class="badge-num" x="600" y="492" text-anchor="middle">4</text>
+              <text class="lbl" x="624" y="493">Insole (inside)</text>
+            </g>
+            <g>
+              <path class="leader" d="M300,388 L250,486"/><circle class="pin" cx="300" cy="388" r="5"/>
+              <circle class="badge" cx="250" cy="486" r="15"/><text class="badge-num" x="250" y="492" text-anchor="middle">5</text>
+              <text class="lbl" x="274" y="493">Midsole</text>
+            </g>
+            <g>
+              <path class="leader" d="M470,420 L420,486"/><circle class="pin" cx="470" cy="420" r="5"/>
+              <circle class="badge" cx="420" cy="486" r="15"/><text class="badge-num" x="420" y="492" text-anchor="middle">6</text>
+              <text class="lbl" x="444" y="493">Outsole</text>
+            </g>
+            <g>
+              <path class="leader" d="M826,330 L870,222"/><circle class="pin" cx="826" cy="330" r="5"/>
+              <circle class="badge" cx="870" cy="222" r="15"/><text class="badge-num" x="870" y="228" text-anchor="middle">7</text>
+              <text class="lbl" x="870" y="190" text-anchor="middle">Toe box</text>
+            </g>
+          </svg>
+          <figcaption>Side view of a typical low-top sneaker. Illustration drawn for this blog, based on the shoe anatomy described by the American Chemical Society, ASICS and Nike.<a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a><a class="cite" href="#ref-5">[5]</a></figcaption>
+        </figure>
+
+        <ol class="parts">
+          <li><span class="n">1</span><div><strong>Upper</strong><span class="d">The material covering the top and sides of the foot. It holds the foot in place and gives the shoe most of its look.</span></div></li>
+          <li><span class="n">2</span><div><strong>Laces</strong><span class="d">Pass through the eyelets to tighten the shoe and secure the foot.</span></div></li>
+          <li><span class="n">3</span><div><strong>Tongue</strong><span class="d">The padded strip under the laces. It gives comfort around the instep and stops laces rubbing the top of the foot.<a class="cite" href="#ref-5">[5]</a></span></div></li>
+          <li><span class="n">4</span><div><strong>Insole</strong><span class="d">The inner layer that contacts the foot. It adds comfort and absorbs some shock.<a class="cite" href="#ref-3">[3]</a></span></div></li>
+          <li><span class="n">5</span><div><strong>Midsole</strong><span class="d">The layer between the outsole and the upper. It often provides cushioning and helps manage impact.<a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a></span></div></li>
+          <li><span class="n">6</span><div><strong>Outsole</strong><span class="d">The bottom layer that touches the ground. It provides traction and resists wear.<a class="cite" href="#ref-4">[4]</a></span></div></li>
+          <li><span class="n">7</span><div><strong>Toe box</strong><span class="d">The front area that houses the toes. Its shape affects comfort and how much room the toes have.</span></div></li>
+        </ol>
+      </div>
+
+      <div class="materials">
+        <h3>Common materials</h3>
+        <p>Designers combine materials to balance comfort, durability, weight and appearance.</p>
+        <dl class="mat-grid">
+          <div><dt><span class="swatch" style="background:#E9E1D2"></span>Canvas</dt><dd><b>Upper.</b> A woven cotton fabric that is light, breathable and easy to print or dye. Classic on vulcanised court shoes.</dd></div>
+          <div><dt><span class="swatch" style="background:repeating-linear-gradient(45deg,#cfd2d4 0 3px,#8f969b 3px 5px)"></span>Mesh</dt><dd><b>Upper.</b> An open-weave or knitted textile that lets air flow. Common on running shoes.</dd></div>
+          <div><dt><span class="swatch" style="background:#8B5A3C"></span>Leather</dt><dd><b>Upper.</b> Durable and structured, and it moulds to the foot over time. Includes smooth leather and soft suede.</dd></div>
+          <div><dt><span class="swatch" style="background:#6E7F8D"></span>Synthetic fabrics</dt><dd><b>Upper and lining.</b> Engineered materials such as nylon, polyester and synthetic leather, chosen for lightness or water resistance.</dd></div>
+          <div><dt><span class="swatch" style="background:#F2EEE6"></span>Foam</dt><dd><b>Midsole and insole.</b> Springy polymers such as EVA (ethylene vinyl acetate) and polyurethane that cushion each step.<a class="cite" href="#ref-3">[3]</a></dd></div>
+          <div><dt><span class="swatch" style="background:#2E2C29"></span>Rubber</dt><dd><b>Outsole.</b> Tough and grippy. Softer compounds grip better, harder ones last longer.<a class="cite" href="#ref-3">[3]</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 06 CARE ===== -->
+  <section class="section" id="care" aria-labelledby="care-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">Section 06</span>
+        <h2 id="care-title">Love your sneakers, make them last</h2>
+        <p class="standfirst">A little care keeps a pair looking good and out of the bin for longer.</p>
+      </div>
+
+      <div class="care-grid">
+        <figure>
+          <img src="images/care.jpg" width="928" height="1152" loading="lazy" alt="Overhead view of a clean pair of white leather sneakers on ivory linen beside a wooden brush, a glass bowl, a folded beige cloth, a terracotta cloth, a wooden shoe tree and spare white laces.">
+          <figcaption>A simple care kit beside a clean pair: soft brush, cloths, a bowl for soapy water, a shoe tree and spare laces. <span class="ai-tag">AI-generated image.</span></figcaption>
+        </figure>
+
+        <div class="care-text">
+          <div class="prose">
+            <p>Dirt, sweat and heat slowly break down the materials in a shoe. Regular, gentle cleaning protects the upper, keeps the sole gripping and stops stains from setting. Caring for sneakers also saves money and cuts waste, because a pair that lasts longer doesn't need replacing as soon.<a class="cite" href="#ref-11">[11]</a></p>
+          </div>
+
+          <ol class="steps" aria-label="Cleaning routine">
+            <li><div><strong>Brush off loose dirt</strong><span>Use a soft brush on the upper and sole before anything gets wet.</span></div></li>
+            <li><div><strong>Clean stains to suit the material</strong><span>Mild soap and water work for canvas and rubber. Leather and suede need gentler, material-specific methods.</span></div></li>
+            <li><div><strong>Let them dry naturally</strong><span>Air-dry away from radiators, heaters and harsh sun, which can warp soles and crack leather.</span></div></li>
+            <li><div><strong>Store them well</strong><span>Keep them in a clean, dry, ventilated place, out of damp plastic bags.</span></div></li>
+          </ol>
+
+          <div class="long-term">
+            <h3>Think beyond cleaning</h3>
+            <ul>
+              <li>Repair or reuse wearable shoes where practical: replace laces and insoles, re-glue soles, or pass on pairs you no longer wear.</li>
+              <li>Consider durability and responsible disposal when choosing footwear. Well-made shoes last longer, and recycling or donation schemes keep old pairs out of landfill.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONCLUSION ===== -->
+  <section class="closing" id="conclusion" aria-labelledby="closing-title">
+    <figure class="closing-media">
+      <img src="images/closing.jpg" width="1376" height="768" loading="lazy" alt="A pair of worn white canvas sneakers with loose laces resting on warm stone steps in golden evening light.">
+      <figcaption>AI-generated image</figcaption>
+    </figure>
+    <div class="wrap">
+      <div>
+        <span class="label">Conclusion</span>
+        <h2 id="closing-title">Every pair tells a story</h2>
+      </div>
+      <div class="prose">
+        <p>Sneakers have travelled a long way from their origins in functional footwear to their place in modern fashion. They bring together design, technology, comfort, sport, and culture in one everyday object.</p>
+        <p>Their variety of shapes, colours, materials, and construction shows how design can influence both function and appearance.</p>
+        <p>Whether simple or bold, classic or contemporary, every pair tells a story through the people who design, wear, and transform it.</p>
+        <p>Step into your own style.</p>
+      </div>
+      <p class="signoff" aria-label="Step into your own style.">Step into your own style<span>.</span></p>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT THE AUTHOR ===== -->
+  <section class="author" id="about-author" aria-labelledby="author-title">
+    <div class="wrap author-grid">
+      <div class="author-id">
+        <h2 id="author-title">About the author</h2>
+        <p class="author-name">Aashna A Shiju</p>
+        <p class="author-role">Fashion Communication | NIFT Hyderabad</p>
+      </div>
+      <div class="author-text">
+        <p class="lead">Hello! I’m Aashna A Shiju, a first-year Fashion Communication student at the National Institute of Fashion Technology, Hyderabad.</p>
+        <p>As a design student, I am interested in exploring fashion, visual storytelling, creativity, and the relationship between design and everyday life.</p>
+        <p>Through this blog, I explore the fascinating world of sneakers, from their history and evolution to their influence on contemporary fashion, culture, and personal style.</p>
+        <p>SOLE STORIES is my creative exploration of how a simple pair of shoes can become a statement of identity, comfort, and self-expression.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REFERENCES ===== -->
+  <section class="section" id="references" aria-labelledby="refs-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">References</span>
+        <h2 id="refs-title">Sources and image credits</h2>
+        <p class="standfirst">Research sources and images used in this blog. Web sources accessed 24 October 2026.</p>
+      </div>
+
+      <div class="refs-grid">
+        <div>
+          <h3>Research sources</h3>
+          <ol class="ref-list">
+            <li id="ref-1">Converse. “The Story of Converse.” <span class="src">Converse official brand history.</span> <a href="https://www.converse.com/c/converse-history" target="_blank" rel="noopener">converse.com/c/converse-history</a></li>
+            <li id="ref-2">Nike, Inc. “Journey of an Icon: The History of the Chuck Taylor All Star.” <span class="src">Nike company magazine.</span> <a href="https://about.nike.com/magazine/converse-chuck-taylor-all-star-iconic-sneaker-true-history" target="_blank" rel="noopener">about.nike.com/magazine/converse-chuck-taylor-all-star-iconic-sneaker-true-history</a></li>
+            <li id="ref-3">American Chemical Society. “Shoe Anatomy.” <span class="src">Celebrating Chemistry educational material, 2008.</span> <a href="https://www.acs.org/content/dam/acsorg/education/resources/k-8/science-activities/articles/shoe-anatomy.pdf" target="_blank" rel="noopener">acs.org (PDF)</a></li>
+            <li id="ref-4">ASICS. “The Anatomy of a Running Shoe.” <span class="src">ASICS educational blog.</span> <a href="https://www.asics.com/us/en-us/blog/anatomy-of-a-running-shoe/" target="_blank" rel="noopener">asics.com/us/en-us/blog/anatomy-of-a-running-shoe</a></li>
+            <li id="ref-5">Nike. “What Are the Parts of a Shoe?” <span class="src">Buying guide, updated 18 July 2022.</span> <a href="https://www.nike.com/a/parts-of-shoe-anatomy" target="_blank" rel="noopener">nike.com/a/parts-of-shoe-anatomy</a></li>
+            <li id="ref-6">Mejía, Michel. “6 ways to style cuffed jeans with white sneakers.” <span class="src">Vogue India, 29 June 2026.</span> <a href="https://www.vogue.in/content/6-ways-to-style-cuffed-jeans-with-white-sneakers" target="_blank" rel="noopener">vogue.in</a></li>
+            <li id="ref-7">Vargas, Melisa. “6 chic ways to style tennis sneakers with dresses and skirts.” <span class="src">Vogue India, 16 August 2026.</span> <a href="https://www.vogue.in/content/6-chic-ways-to-style-tennis-sneakers-with-dresses-and-skirts" target="_blank" rel="noopener">vogue.in</a></li>
+            <li id="ref-8">Pérez Sánchez, Fernanda. “’80s sneakers are back—just like everything else from the decade.” <span class="src">Vogue India, 13 September 2026.</span> <a href="https://www.vogue.in/content/80s-sneakers-are-back-just-like-everything-else-from-the-decade" target="_blank" rel="noopener">vogue.in</a></li>
+            <li id="ref-9">Cary, Alice. “The canvas high-top is becoming 2026’s anti-hype sneaker.” <span class="src">Vogue India, 2 July 2026.</span> <a href="https://www.vogue.in/content/converse-chuck-taylor-are-becoming-the-it-sneakers-of-2026" target="_blank" rel="noopener">vogue.in</a></li>
+            <li id="ref-10">“Charles Goodyear.” <span class="src">Wikipedia (background on the 1844 vulcanisation patent).</span> <a href="https://en.wikipedia.org/wiki/Charles_Goodyear" target="_blank" rel="noopener">en.wikipedia.org/wiki/Charles_Goodyear</a></li>
+            <li id="ref-11">Nike. “How to Clean Your Shoes in 6 Easy Steps.” <span class="src">Nike care guide.</span> <a href="https://www.nike.com/a/how-to-clean-shoes" target="_blank" rel="noopener">nike.com/a/how-to-clean-shoes</a></li>
+          </ol>
+        </div>
+
+        <div>
+          <h3>Image credits</h3>
+          <div class="ai-box">
+            <p><strong>AI-generated images (15).</strong> The homepage hero, both images in Section 01, all six style images in Section 03, all four looks in Section 04, the care image in Section 06 and the closing image were generated for this blog with Google's Gemini 3.1 Flash Image model in Figma in October 2026, from prompts I wrote. They are illustrations, not photographs of real people or real branded products.</p>
+            <div class="ai-thumbs" aria-hidden="true">
+              <img src="images/hero.jpg" alt=""><img src="images/classic-white.jpg" alt=""><img src="images/materials.jpg" alt=""><img src="images/low-top.jpg" alt=""><img src="images/high-top.jpg" alt=""><img src="images/chunky.jpg" alt=""><img src="images/platform.jpg" alt=""><img src="images/running.jpg" alt=""><img src="images/retro.jpg" alt=""><img src="images/casual.jpg" alt=""><img src="images/streetwear.jpg" alt=""><img src="images/feminine.jpg" alt=""><img src="images/monochrome.jpg" alt=""><img src="images/care.jpg" alt=""><img src="images/closing.jpg" alt="">
+            </div>
+          </div>
+          <ul class="credits">
+            <li><img src="images/tl-1890s.jpg" alt="" loading="lazy"><div>“Goodyear sneakers, 1890s, Goodyear Rubber Manufacturing Company – Bata Shoe Museum” by Daderot. <span class="muted">CC0 1.0.</span> <a href="https://commons.wikimedia.org/wiki/File:Goodyear_sneakers,_1890s,_Goodyear_Rubber_Manufacturing_Company_-_Bata_Shoe_Museum_-_DSC00745-001.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></div></li>
+            <li><img src="images/tl-1916.jpg" alt="" loading="lazy"><div>“Keds Champion sneaker, woman's, 1916 – Bata Shoe Museum” by Daderot. <span class="muted">CC0 1.0.</span> <a href="https://commons.wikimedia.org/wiki/File:Keds_Champion_sneaker,_woman%27s,_1916_-_Bata_Shoe_Museum_-_DSC00729.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></div></li>
+            <li><img src="images/tl-1929.jpg" alt="" loading="lazy"><div>“Keds basketball sneakers, 1929 – Bata Shoe Museum” by Daderot. <span class="muted">CC0 1.0.</span> <a href="https://commons.wikimedia.org/wiki/File:Keds_basketball_sneakers,_1929_-_Bata_Shoe_Museum_-_DSC00724.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></div></li>
+            <li><img src="images/tl-cortez.jpg" alt="" loading="lazy"><div>“Nike Cortez” by LeDroider. <span class="muted">CC0 1.0.</span> <a href="https://commons.wikimedia.org/wiki/File:Nike_Cortez.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></li>
+            <li><img src="images/tl-harajuku.jpg" alt="" loading="lazy"><div>“Harajuku Fashion Street Snap (2018-01-08)” by Dick Thomas Johnson. <span class="muted">Licensed under <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>; resized for the web.</span> <a href="https://commons.wikimedia.org/wiki/File:Harajuku_Fashion_Street_Snap_(2018-01-08_18.53.16_by_Dick_Thomas_Johnson).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></li>
+          </ul>
+          <p class="caption refs-note" style="margin-top:1rem">The sneaker anatomy diagram in Section 05 was drawn for this blog.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECT DETAILS ===== -->
+  <section class="section" id="project-details" aria-labelledby="project-title">
+    <div class="wrap">
+      <h2 class="project-head" id="project-title">Project details</h2>
+      <dl class="project-grid">
+        <div><dt>Project Title</dt><dd>Sole Stories – The World of Sneakers</dd></div>
+        <div><dt>Submitted By</dt><dd>Aashna A Shiju</dd></div>
+        <div><dt>Department</dt><dd>Fashion Communication</dd></div>
+        <div><dt>Institution</dt><dd>NIFT Hyderabad</dd></div>
+        <div><dt>Academic Year</dt><dd>First Year</dd></div>
+        <div><dt>Subject</dt><dd>Fashion Basics</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="wordmark" href="#home">SOLE STORIES<span>.</span></a>
+    <p>A Fashion Basics assignment by Aashna A Shiju, a first-year Fashion Communication student, NIFT Hyderabad, 2026. <a href="#references">Sources and credits</a></p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var toggle = document.getElementById('nav-toggle');
+    var nav = document.getElementById('site-nav');
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? 'Close' : 'Menu';
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = 'Menu';
+      }
+    });
+
+    // Highlight the nav link for the section in view.
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+    var map = { home: 'home', what: 'home', history: 'history', styles: 'styles', fashion: 'fashion', anatomy: 'anatomy', care: 'care' };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var key = map[en.target.id];
+          links.forEach(function (a) {
+            if (key && a.getAttribute('href') === '#' + key) a.setAttribute('aria-current', 'true');
+            else a.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+    }
+  })();
+</script>
+</body>
+</html>
